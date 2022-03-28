@@ -4,12 +4,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:health/utils/asset.dart';
 import 'package:health/utils/constant.dart';
 import 'package:health/utils/theme.dart';
-import 'package:health/views/cart/cart.dart';
 import 'package:health/views/search/search.dart';
 import 'package:health/widget/searchfield.dart';
 import 'package:svg_icon/svg_icon.dart';
 
-PreferredSize appbar(BuildContext context,String title){
+PreferredSize cartappbar(BuildContext context,String title,{bool canpop = false}){
   return PreferredSize(child:Container(
     decoration:const BoxDecoration(
         color: kprimarycolor,
@@ -25,20 +24,15 @@ PreferredSize appbar(BuildContext context,String title){
           const SizedBox(height: 66,),
           Row(
             children:   [
-              GestureDetector(
+             canpop==false?SizedBox():GestureDetector(
                   onTap: (){
                     Navigator.pop(context);
                   },
                   child:const Icon(Icons.arrow_back_ios_rounded,color: Colors.white,size: 20,)),
-              const SizedBox(width: 17,),
-               Text(title,style:const TextStyle(fontSize: 22,fontWeight: FontWeight.w700,color: Colors.white),),
+              canpop==false?SizedBox():const SizedBox(width: 17,),
+              Text(title,style:const TextStyle(fontSize: 22,fontWeight: FontWeight.w700,color: Colors.white),),
               const Spacer(),
-                InkWell(
-                  onTap: (){
-                    Navigator.push(context,
-                        MaterialPageRoute(builder:(context)=>Cart()));
-                  },
-                    child: SvgPicture.asset(kcartbus)),
+
 
             ],
           ),

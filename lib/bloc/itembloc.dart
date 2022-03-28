@@ -4,14 +4,31 @@ import 'package:health/model/itemmodel.dart';
 class Itembloc extends ChangeNotifier{
   List<Item> item = items;
   List<Item> cartitem = [];
+  List<Item> newcartitem = [];
   List<Item> searchitem = [];
 
   additem(Item item){
-    cartitem.add(item);
+    Item data = Item(
+      productid: item.productid,
+      name:item.name ,
+      amount:item.amount,
+      image:item.image ,
+      weight:item.weight ,
+      quantity:item.quantity
+    );
+   var exist =  cartitem.where((element) => element.image==item.image);
+   if(exist.isNotEmpty){
+     int index = cartitem.indexOf(exist.first);
+     cartitem[index].quantity++;
+   }else{
+     cartitem.add(data);
+   }
+
     notifyListeners();
   }
-  removeitem(int index){
-    cartitem.removeAt(index);
+  removeitem(Item data){
+    int index = cartitem.indexOf(data);
+     cartitem.removeAt(index);
     notifyListeners();
   }
 

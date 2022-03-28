@@ -1,8 +1,11 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:health/bloc/itembloc.dart';
 import 'package:health/model/itemmodel.dart';
+import 'package:health/utils/bottomsheet.dart';
 import 'package:health/utils/theme.dart';
+import 'package:provider/provider.dart';
 
 class Itemcard2 extends StatelessWidget {
   Item data;
@@ -10,6 +13,7 @@ class Itemcard2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Itembloc itembloc = Provider.of<Itembloc>(context,listen: false);
     return Card(
       elevation: 2,
       shape:RoundedRectangleBorder(
@@ -47,20 +51,27 @@ class Itemcard2 extends StatelessWidget {
                   const SizedBox(height: 8,),
                   Row(
                     children: [
-                      Text("₦"+data.amount!.toString(),style:const TextStyle(fontWeight: FontWeight.w600,fontSize: 14,color: Colors.black),),
-                      Spacer(),
+                      Text("₦"+data.amount.toString(),style:const TextStyle(fontWeight: FontWeight.w600,fontSize: 14,color: Colors.black),),
+                      const Spacer(),
                       SvgPicture.asset('image/icons/love.svg')
                     ],
                   ),
                   const SizedBox(height:10,),
-                  Container(
-                    width: double.maxFinite,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: kprimarycolor)
+                  InkWell(
+                    onTap: (){
+                      data.quantity=1;
+                      itembloc.additem(data);
+                      Sheet().showsheet(context, data);
+                      },
+                    child: Container(
+                      width: double.maxFinite,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: kprimarycolor)
+                      ),
+                      child:const Center(child: Text('ADD TO CART',style: TextStyle(fontSize: 13,fontWeight: FontWeight.w700,color: kprimarycolor),)) ,
                     ),
-                    child:const Center(child: Text('ADD TO CART',style: TextStyle(fontSize: 13,fontWeight: FontWeight.w700,color: kprimarycolor),)) ,
                   )
                 ],
               ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:health/bloc/itembloc.dart';
 import 'package:health/utils/theme.dart';
 import 'package:health/views/home/home.dart';
+import 'package:health/views/root.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: themedata,
       debugShowCheckedModeBanner: false,
-      home: Home(),
+      home: Rootapp(),
     );
   }
 }

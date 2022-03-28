@@ -14,8 +14,8 @@ class Locationcard extends StatelessWidget {
         child: Row(
           children:const [
             SizedBox(width: 25,),
-            Icon(Icons.location_on_outlined,color: Colors.black,size: 20,),
-            Text('Delivery in Lagos, NG ',
+            Icon(Icons.location_on_outlined,color: Colors.black,size: 18,),
+            Text('Delivery in  ',
               style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400),),
             Text('Lagos, NG ',
               style: TextStyle(fontSize: 14,fontWeight: FontWeight.w600),)
